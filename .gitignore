@@ -1,0 +1,7 @@
+Transactions/
+Banking/
+COC/
+HYSA/
+*.xlsx
+*.csv
+.DS_Store
