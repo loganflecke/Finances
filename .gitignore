@@ -5,3 +5,5 @@ HYSA/
 *.xlsx
 *.csv
 .DS_Store
+trove_key.py
+__pycache__
