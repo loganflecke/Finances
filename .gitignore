@@ -4,6 +4,7 @@ COC/
 HYSA/
 *.xlsx
 *.csv
+*.json
 .DS_Store
 trove_key.py
 __pycache__
