@@ -2,17 +2,15 @@
 
 ## Purpose
 
-This repository answers a simple but increasingly important question:
-
 **How much money are you spending with specific companies?**
 
 From there, the analysis can be extended to explore **ethical alignment**—identifying spending on companies or industries that conflict with your values. That deeper analysis depends on external datasets (ex: NGO reports, government datasets, open-source data) that can be integrated later.
 
-At its core, this project provides a way to:
-- Aggregate personal financial data
-- Normalize and enrich merchant information
-- Categorize expenses meaningfully
-- Produce clear monthly summaries and breakdowns
+This project:
+- Aggregates personal financial data
+- Enriches personal transaction descriptions with merchant information
+- Categorizes expenses
+- Produces monthly summaries
 
 ---
 
@@ -22,9 +20,9 @@ The project ingests raw financial transaction files, enriches merchants using ca
 
 Key features:
 - Local caching of merchant lookups to minimize repeated API calls
-- Custom category mapping for full control over how spending is classified
+- Custom category mapping
 - Monthly net calculations with configurable lookback windows
-- Clear separation of expense types (fixed, variable, discretionary)
+- Separation of expense types (fixed, variable, discretionary)
 
 ---
 
@@ -34,34 +32,31 @@ Key features:
 
 Merchant enrichment relies on the **Trove API**.
 
-You must create a file named `trove.py` in the repository with the following contents:
+You must create a file named `trove.py` in the repository with the following contents ("api_key" is your API key):
 
 ```python
 TROVE_KEY = "api_key"
 ```
-
+ 
 To obtain an API key:
 1. Sign up at https://trove.headline.com/
-2. Download or copy your API key
+2. Copy your API key
 3. Paste it into trove.py as shown above
-4. This file is imported directly by the project and should not be committed to GitHub.
+4. This file is imported by the project and should not be committed to GitHub.
 
 ## Inputs
 
 ### 1. Financial Data Files
 - Raw transaction files (format depends on your financial institution)
 - File paths must be explicitly specified in the script
-- Each file is treated as a distinct input source and preserved as its own output sheet
 
 ### 2. Merchant Intelligence Cache
-- A **local lookup file** that maps raw merchant names to normalized merchant entities (companies)
+- A **local lookup file** that maps raw transaction descriptions to companies
 - Built incrementally as the script runs
-- Reduces API usage over time by avoiding repeat lookups
 
 ### 3. Category Mapping File
-- A **local category lookup file**
-- Maps merchants to **custom categories**
-- Categories drive downstream expense classification (fixed, variable, discretionary)
+- A **local category lookup file** (JSON where keys are categories and values are arrays of transaction substrings)
+- Categories drive expense classification (fixed, variable, discretionary)
 
 > Expense type definitions are applied *after* enrichment and category merging.
 
